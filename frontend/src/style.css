@@ -1,9 +1,311 @@
-body { font-family: Arial, sans-serif; background: #f6f6f6; margin: 24px; color: #222; }
-main { max-width: 850px; margin: auto; background: white; padding: 20px; border: 1px solid #ddd; }
-h1 { font-size: 24px; } h2 { font-size: 19px; margin-top: 25px; }
-form { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; }
-label { display: flex; flex-direction: column; gap: 4px; }
-input, select, button { padding: 7px; font-size: 14px; }
-button { cursor: pointer; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border: 1px solid #aaa; padding: 8px; text-align: left; }
+
+/* ESTILOS GENERALES */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #1e293b;
+  background: linear-gradient(135deg, #eaf1ff, #f8fafc);
+}
+
+#root {
+  padding: 40px 20px;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(30, 41, 59, 0.10);
+}
+
+/* TITULOS */
+
+h1 {
+  margin: 0 0 24px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 35px 0 18px;
+  font-size: 21px;
+  color: #1e3a5f;
+}
+
+/* ENCABEZADO DEL DASHBOARD */
+
+main:has(table) > h1 {
+  padding: 30px;
+  margin: -35px -35px 25px;
+  color: white;
+  background: linear-gradient(120deg, #142d50, #2563eb);
+  border-radius: 18px 18px 0 0;
+}
+
+/* INFORMACION DEL USUARIO */
+
+main:has(table) > p:first-of-type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 20px;
+  background: #eff6ff;
+  border-radius: 10px;
+  color: #1e40af;
+  font-weight: 600;
+}
+
+/* SALAS DISPONIBLES */
+
+ul {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+ul li {
+  padding: 25px 20px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #dbeafe;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  transition: 0.25s ease;
+}
+
+ul li::before {
+  content: "📚";
+  display: block;
+  margin-bottom: 12px;
+  font-size: 28px;
+}
+
+ul li:hover {
+  transform: translateY(-4px);
+  border-color: #3b82f6;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.10);
+}
+
+/* FORMULARIOS */
+
+form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  padding: 25px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+input,
+select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: white;
+  color: #1e293b;
+  font: inherit;
+  font-weight: 400;
+  transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* BOTONES */
+
+button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 9px;
+  background: #2563eb;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+form > button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  min-width: 150px;
+}
+
+main:has(table) > p:first-of-type button {
+  background: #ffffff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+}
+
+main:has(table) > p:first-of-type button:hover {
+  background: #dbeafe;
+}
+
+/* TABLA DE RESERVAS */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+thead {
+  background: #1e3a5f;
+  color: white;
+}
+
+th {
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+}
+
+td {
+  padding: 15px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+tbody tr:hover {
+  background: #eff6ff;
+}
+
+/* MENSAJES DEL SISTEMA */
+
+main:has(table) > form + p {
+  padding: 14px 18px;
+  background: #eff6ff;
+  color: #1e40af;
+  border-left: 4px solid #2563eb;
+  border-radius: 8px;
+}
+
+/* PANTALLA DE LOGIN */
+
+main:not(:has(table)) {
+  max-width: 460px;
+  margin: 9vh auto 0;
+  padding: 40px;
+}
+
+main:not(:has(table))::before {
+  content: "BIBLIOTECA DIGITAL";
+  display: block;
+  margin-bottom: 20px;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+main:not(:has(table)) h1 {
+  font-size: 27px;
+  color: #142d50;
+}
+
+main:not(:has(table)) form {
+  grid-template-columns: 1fr;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+main:not(:has(table)) form button {
+  width: 100%;
+}
+
+main:not(:has(table)) > p {
+  margin-top: 22px;
+  font-size: 13px;
+  color: #64748b;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+  form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  #root {
+    padding: 15px;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  main:has(table) > h1 {
+    margin: -20px -20px 20px;
+    padding: 24px;
+    font-size: 23px;
+  }
+
+  form,
+  ul {
+    grid-template-columns: 1fr;
+  }
+
+  main:has(table) > p:first-of-type {
+    flex-wrap: wrap;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  main:not(:has(table)) {
+    margin-top: 5vh;
+    padding: 28px;
+  }
+}

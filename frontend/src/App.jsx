@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 
 // credentials:'include' envía la cookie de sesión al backend.
