@@ -1,0 +1,5 @@
+node_modules/
+backend/biblioteca.sqlite
+backend/biblioteca.sqlite-*
+.env
+.DS_Store
